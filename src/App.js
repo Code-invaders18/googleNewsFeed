@@ -27,6 +27,25 @@ const App = () => {
     setQuery(search);
     setQuery("");
   };
+  const showNews = () => {
+    console.log("this is showNews");
+    return (
+      news.length > 0 &&
+      news.articles.map(article => {
+        console.log(article);
+        return (
+          <News
+            title={article.title}
+            publish={article.articles.publishAt}
+            image={article.articles.urlToImage}
+            discription={article.articles.discription}
+          />
+        );
+      })
+    );
+  };
+  console.log(news.articles);
+
   return (
     <div className="App">
       <form onSubmit={onSubmitSearch} className="searchForm">
@@ -40,16 +59,7 @@ const App = () => {
           Search
         </button>
       </form>
-      <div className="newsDaily">
-        {news.map(articles => (
-          <News
-            title={articles.source.title}
-            publish={articles.source.publishAt}
-            image={articles.source.urlToImage}
-            discription={articles.source.discription}
-          />
-        ))}
-      </div>
+      <div className="newsDaily">{showNews()}</div>
     </div>
   );
 };
